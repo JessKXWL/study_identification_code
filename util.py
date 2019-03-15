@@ -10,11 +10,9 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 def get_batch(data_path = captcha_path, is_training = True):
     target_file_list = os.listdir(data_path)    #读取路径下的所有文件名
-
     batch = batch_size if is_training else len(target_file_list)   # 确认batch 大小
     batch_x = np.zeros([batch, time_steps, n_input])   #batch 数据
     batch_y = np.zeros([batch, captcha_num, n_classes])   # batch 标签
-
     for i in range(batch):
         file_name = random.choice(target_file_list) if is_training else target_file_list[i] #确认要打开的文件名
         img = Image.open(data_path + '/' + file_name) #打开图片
